@@ -1,5 +1,5 @@
-out_dir: '/path/to/out/dir'
-ncbi_dir: '/path/to/configures/ncbi/dir'
+out_dir: '/scratch1/fs1/martyomov/maksim/permanent/scn-pipeline_storage'
+ncbi_dir: '/scratch1/fs1/martyomov/maksim/permanent/ncbi_storage'
 
 
 

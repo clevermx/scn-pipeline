@@ -10,12 +10,12 @@ from random import shuffle
 pd.options.display.width = 100000
 random.seed(0)
 
-os.chdir("/home/askmebefore/dump")
+os.chdir("/home/maksim/dump")
 
-studies = read_studies("~/dump/20220101_20220930.study.tsv")
+studies = read_studies("/scratch1/fs1/martyomov/maksim/permanent/scn-pipeline_storage/meta/dump/20230101_20230131.study.tsv")
 print(studies)
 
-samples = read_samples("~/dump/20220101_20220930.sample.tsv")
+samples = read_samples("/scratch1/fs1/martyomov/maksim/permanent/scn-pipeline_storage/meta/dump/20230101_20230131.sample.tsv")
 print(samples)
 
 any_single_cell = studies[list(map(lambda x: len(x) > 0, studies["technology"]))]

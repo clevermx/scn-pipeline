@@ -1,4 +1,5 @@
 import json
+import time
 from DefineVersionTenX import prepare_files_10x
 from DefineVersionDropseq import prepare_files_dropseq
 from DefineTechnologyUtils import *
@@ -21,8 +22,10 @@ with open(snakemake.input["ffq_json"], "r") as in_file:
             for srs_accession, srs_sample in gsm_sample["samples"].items():
                 for srx_accession, srx_experiment in srs_sample["experiments"].items():
                     for srr_accession, srr_run in srx_experiment["runs"].items():
+                        time.sleep(0.4)
                         technology = parse_srs_for_tech(srs_accession)
                         srr_run["technology"] = technology
+                        time.sleep(0.4)
 
                         if technology == Constants.TECH_10X:
 

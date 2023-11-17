@@ -18,7 +18,8 @@ STAR --genomeDir $index_dir \
   --outFileNamePrefix {{ out_dir }} \
   --runThreadN {{ threads }} \
   --readFilesCommand zcat \
-  --outSAMtype BAM Unsorted
+  --outSAMtype BAM Unsorted \
+  --limitOutSJcollapsed 2000000
 
     {% endif %}
   {% endif %}

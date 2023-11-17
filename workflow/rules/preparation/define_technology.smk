@@ -13,8 +13,8 @@ rule define_tech:
         ncbi_dir=config['ncbi_dir']
     log: "logs/{dataset}/define_technology.log"
     benchmark: "logs/{dataset}/define_technology.benchmark"
-    threads: 4
+    threads: 2 
     resources:
-        mem_mb=8000
+        mem_mb=64000
     conda: "../../envs/define_technology.yaml"
     script: "../../scripts/DefineTechnology.py"

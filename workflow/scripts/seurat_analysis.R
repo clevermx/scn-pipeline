@@ -147,7 +147,7 @@ for (ident in allIdents) {
   seurat_stats$clustering[[ident]] <- length(levels(data@meta.data[[ident]]))
 }
 
-Idents(data) <- data[[defaultIdent]]
+Idents(data) <- defaultIdent
 
 tsnePlot <- DimPlot(data, reduction = "tsne") + theme(aspect.ratio = 1)
 ggsave(snakemake@output$tsne_plot, plot=tsnePlot, width=6, height=4)

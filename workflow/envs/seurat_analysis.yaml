@@ -3,15 +3,15 @@ channels:
  - conda-forge
 dependencies:
  - fit-sne=1.2.1
- - r-base=4.0.3
- - r-cairo=1.5_15
- - r-remotes=2.2.0
- - r-ggplot2=3.3.2
- - r-flexmix=2.3_17
- - r-biocmanager=1.30.10
- - r-matrix=1.4_1
- - r-seurat=4.1.1
- - r-jsonlite=1.7.1
- - bioconda::bioconductor-glmgampoi=1.2.0
- - bioconda::bioconductor-limma=3.46.0
- - bioturing::r-seuratwrappers=0.3.0
+ - r-base=4.3.1
+ - r-cairo=1.6_1
+ - r-remotes=2.4.2.1
+ - r-ggplot2=3.4.3
+ - r-flexmix=2.3_19
+ - r-biocmanager=1.30.22
+ - r-matrix=1.6_1.1
+ - r-seurat=4.4.0
+ - r-jsonlite=1.8.7
+ - bioconda::bioconductor-glmgampoi=1.12.2
+ - bioconda::bioconductor-limma=3.56.2
+ - bioturing::r-seuratwrappers=0.3.1                                    

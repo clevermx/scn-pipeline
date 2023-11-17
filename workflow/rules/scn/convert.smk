@@ -72,7 +72,7 @@ rule upload_to_box:
         box_receipt = "data/samples/{dataset}/{sample}/box_receipt.txt"
     params:
         to_upload=lambda wildcards, output: os.path.split(output["box_receipt"])[0],
-        box_path="dump_2022/data/{dataset}_{sample}"
+        box_path="dump_2023/data/{dataset}_{sample}"
     threads: 4
     conda: "../../envs/define_technology.yaml"
     log: "logs/{dataset}/{sample}/upload_to_box.log"
@@ -88,7 +88,7 @@ use rule upload_to_box as upload_to_box_merged with:
         box_receipt = "data/datasets/{dataset}/dropbox_receipt.txt"
     params:
         to_upload=lambda wildcards, output: os.path.split(output["box_receipt"])[0],
-        box_path="dump_2022/data/{dataset}"
+        box_path="dump_2023/data/{dataset}"
     log: "logs/{dataset}/upload_to_box.log"
     benchmark: "logs/{dataset}/upload_to_box.benchmark"
 
