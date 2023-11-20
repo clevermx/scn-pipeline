@@ -9,11 +9,11 @@ data <- NormalizeData(data)
 averagePCT <- function(seurat,
                        ident, # columns from @meta.data
                    assay="RNA",
-                       slot="counts",
+                       layer="counts",
                        threshold=0) {
   seurat <- SetIdent(seurat, value=ident)
   allLevels <- levels(Idents(seurat))
-  data <- GetAssayData(seurat, assay=assay, slot=slot)
+  data <- GetAssayData(seurat, assay=assay, layer=layer)
 
   results <- matrix(nrow=nrow(data), ncol=length(allLevels),
                     dimnames = list(rownames(data), allLevels))
@@ -39,7 +39,7 @@ allMarkers <- function(seurat,
                        assay="RNA",
                        slot="data") {
 
-  Idents(seurat) <- seurat[[ident]]
+  Idents(seurat) <- ident
   whole.markers <- FindAllMarkers(object = seurat,
                                   assay=assay,
                                   slot=slot,
