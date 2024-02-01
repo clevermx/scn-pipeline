@@ -9,7 +9,7 @@ library(dplyr)
 data <- readRDS(snakemake@input$seurat)
 hvfinfo <- HVFInfo(data)
 topGenes <- min(nrow(hvfinfo), 10000)
-variableGenes <- hvfinfo[order(-hvfinfo$residual_variance), ][1:topGenes, ]
+variableGenes <- hvfinfo[order(-hvfinfo$mvp.dispersion), ][1:topGenes, ]
 VariableFeatures(data) <- rownames(variableGenes)
 
 top20_variable_genes <- head(VariableFeatures(data), 20)
@@ -22,7 +22,7 @@ ggsave(snakemake@output$variable_feature_plot, plot=vfPlot, width=6, height=4)
 npcs <- min(ncol(data) - 1, 50)
 data <- RunPCA(data,
                features=VariableFeatures(data),
-               assay = "SCT",
+               assay = "RNA",
                verbose = FALSE,
                npcs = npcs,
                rev.pca = TRUE,

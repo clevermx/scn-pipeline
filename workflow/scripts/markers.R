@@ -4,7 +4,7 @@ library(Seurat)
 data <- readRDS(snakemake@input$seurat)
 
 DefaultAssay(data) <- "RNA"
-data <- NormalizeData(data)
+
 
 averagePCT <- function(seurat,
                        ident, # columns from @meta.data
@@ -13,7 +13,7 @@ averagePCT <- function(seurat,
                        threshold=0) {
   seurat <- SetIdent(seurat, value=ident)
   allLevels <- levels(Idents(seurat))
-  data <- GetAssayData(seurat, assay=assay, layer=layer)
+  data <- LayerData(seurat, assay = assay, layer = layer)
 
   results <- matrix(nrow=nrow(data), ncol=length(allLevels),
                     dimnames = list(rownames(data), allLevels))
@@ -29,8 +29,8 @@ averagePCT <- function(seurat,
 averageExpression <- function(seurat,
                               ident,
                               assay="RNA",
-                              slot="data") {
-  cluster.averages <- AverageExpression(object = seurat, group.by=ident, assays = assay, slot = slot)
+                              layer="data") {
+  cluster.averages <- AverageExpression(object = seurat, group.by=ident, assays = assay, layer = "data")
   return(cluster.averages[[1]])
 }
 
@@ -56,9 +56,9 @@ allMarkers <- function(seurat,
 for (index in 1:length(snakemake@params$resolutions)) {
 
   resolution <- snakemake@params$resolutions[index]
-  identName <- paste0('SCT_snn_res.', resolution)
+  identName <- paste0('RNA_snn_res.', resolution)
 
-  clusterAverages <- averageExpression(data, identName)
+  clusterAverages <- averageExpression(seurat = data, ident = identName)
   write.table(clusterAverages, file=snakemake@output$clusters_avg[index])
 
   clusterPCTs <- averagePCT(data, identName)

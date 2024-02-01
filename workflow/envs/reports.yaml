@@ -2,9 +2,9 @@ name: r-reports-generation
 channels:
  - conda-forge
 dependencies:
- - r-base=4.3.1
+ - r-base=4.3.2
  - r-cairo=1.6_1
  - r-ggplot2=3.4.3
- - r-seurat=4.4.0
+ - r-seurat=5.0.1
  - r-jsonlite=1.8.7
  - r-rmarkdown=2.23

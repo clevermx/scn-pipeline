@@ -3,7 +3,7 @@ from DefineTechnologyUtils import *
 
 def find_geo_meta(dataset: str, file_study: str, file_sample: str):
     results = parse_gse_meta(dataset)
-    link = f"https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc={dataset}"
+    link = f"https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?api_key=c3c250a11438dea5e1974e519c8e770ddd08&acc={dataset}"
     if len(results["experiments"]) > 0:
         df = pd.DataFrame.from_dict(results["experiments"], orient="index")
         df["dataset"] = dataset

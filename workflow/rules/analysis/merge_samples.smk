@@ -10,7 +10,7 @@ rule merge_samples:
         objects = dispatcher.get_seurat_objects
     output:
         seurat = "data/datasets/{dataset}/seurat.rds",
-        elbow_plot= report("data/datasets/{dataset}/plots/elbow_plot.pdf"),
+        # elbow_plot= report("data/datasets/{dataset}/plots/elbow_plot.pdf"),
         tsne_plot= report("data/datasets/{dataset}/plots/tsne_plot.pdf"),
         umap_plot= report("data/datasets/{dataset}/plots/umap_plot.pdf")
     params:
@@ -31,7 +31,7 @@ use rule merge_samples as merge_samples_forced with:
         objects=dispatcher.get_seurat_objects_forced
     output:
         seurat="data/datasets/{dataset}/forced/seurat.rds",
-        elbow_plot=report("data/datasets/{dataset}/forced/plots/elbow_plot.pdf"),
+        #elbow_plot=report("data/datasets/{dataset}/forced/plots/elbow_plot.pdf"),
         tsne_plot=report("data/datasets/{dataset}/forced/plots/tsne_plot.pdf"),
         umap_plot=report("data/datasets/{dataset}/forced/plots/umap_plot.pdf")
 

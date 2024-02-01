@@ -96,14 +96,18 @@ ggsave(snakemake@output$umi_features_plot_after, plot=umiFeaturesPlotAfter, widt
 
 ## NORMALIZATION
 
-data <- SCTransform(
-  data,
-  method = "glmGamPoi",
-  ncells=min(100000, ncol(data)),
-  vars.to.regress = c("percent.mt"),
-  verbose = T,
-  conserve.memory = T
-)
+#data <- SCTransform(
+#  data,
+#  method = "glmGamPoi",
+#  ncells=min(100000, ncol(data)),
+#  vars.to.regress = c("percent.mt"),
+#  verbose = T,
+#  conserve.memory = T
+#)
+
+data <- NormalizeData(data)
+data <- FindVariableFeatures(object = data, selection.method = 'mean.var.plot', mean.cutoff = c(0.0125, 3), dispersion.cutoff = c(0.5, Inf))
+data <- ScaleData(object = data, features = VariableFeatures(object = data), vars.to.regress = c("nCount_RNA", "percent.mt"))
 
 ## PCA
 npcs <- min(ncol(data) - 1, 50)
@@ -134,13 +138,13 @@ resolutions <- snakemake@params$resolutions
 defaultResolution <- snakemake@params$default_resolution
 
 data <- FindNeighbors(object = data, dims = 1:20)
-data <- FindClusters(object = data, resolution = resolutions)
+data <- FindClusters(object = data, resolution = resolutions, save.SNN = TRUE)
 
 
 ## Default resolution to be 0.6
 
-allIdents <- paste0('SCT_snn_res.', resolutions)
-defaultIdent <- paste0('SCT_snn_res.', defaultResolution)
+allIdents <- paste0('RNA_snn_res.', resolutions)
+defaultIdent <- paste0('RNA_snn_res.', defaultResolution)
 
 seurat_stats$clustering <- list()
 for (ident in allIdents) {

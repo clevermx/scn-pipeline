@@ -110,7 +110,7 @@ def get_geo_ids(start_date: datetime.date, end_date: datetime.date, org: str) ->
     start_date_str = start_date.strftime("%Y/%m/%d")
     end_date_str = end_date.strftime("%Y/%m/%d")
     xml_url = f'https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=gds&term={start_date_str}:{end_date_str}[PDAT' \
-              f']+AND+{re.sub(" ", "%20", org)}[orgn]AND+(gse[ETYP]+OR+gds[ETYP])&retmax=50000&usehistory=y '
+              f']+AND+{re.sub(" ", "%20", org)}[orgn]AND+(gse[ETYP]+OR+gds[ETYP])&retmax=50000&usehistory=y&api_key=c3c250a11438dea5e1974e519c8e770ddd08 '
     gds_ids = url_open(xml_url).read()
     gds_tree = ET.fromstring(gds_ids)
     gds_pattern = re.compile(r'^20+')
@@ -156,7 +156,7 @@ def get_sample_info(df_info: dict, xml_tree) -> dict:
 
 def get_sra_ids(geo_id: str) -> dict:
     meta_data = dict()
-    url = "https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=" + geo_id
+    url = "https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=" + geo_id + "&api_key=c3c250a11438dea5e1974e519c8e770ddd08"
     article = Request(url, headers={'User-Agent': 'Mozilla/5.0'})
     geo_page = url_open(article).read()
     geo_id = re.findall('GSE\d*', geo_page.decode('utf-8'))
@@ -331,7 +331,7 @@ def get_tech_from_srx(srr_accession, alias):
     result = {
         'accession': srr_accession,
         'alias': alias,
-        'link': f"https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc={alias}",
+        'link': f"https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc={alias}&api_key=c3c250a11438dea5e1974e519c8e770ddd08",
         'title': '',
         'description': '',
         'error': "",
