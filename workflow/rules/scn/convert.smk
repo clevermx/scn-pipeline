@@ -37,7 +37,7 @@ use rule convert_to_scn as convert_to_scn_merged with:
         study_meta=rules.parse_geo_meta.output.file_study,
         sample_meta=rules.parse_geo_meta.output.file_sample,
         seurat=rules.merge_samples.output.seurat,
-        markers=rules.markers_merged.output.markers[2]
+        markers=rules.markers_merged.output.markers
     output:
         descriptor="data/datasets/{dataset}/scn/dataset.json",
         plot_data="data/datasets/{dataset}/scn/plot_data.json",
@@ -72,7 +72,7 @@ rule upload_to_box:
         box_receipt = "data/samples/{dataset}/{sample}/box_receipt.txt"
     params:
         to_upload=lambda wildcards, output: os.path.split(output["box_receipt"])[0],
-        box_path="dump_2023/data/{dataset}_{sample}"
+        box_path="scn_m_datasets/public/dump_2023/{dataset}_{sample}"
     threads: 4
     conda: "../../envs/define_technology.yaml"
     log: "logs/{dataset}/{sample}/upload_to_box.log"
@@ -88,7 +88,7 @@ use rule upload_to_box as upload_to_box_merged with:
         box_receipt = "data/datasets/{dataset}/dropbox_receipt.txt"
     params:
         to_upload=lambda wildcards, output: os.path.split(output["box_receipt"])[0],
-        box_path="dump_2023/data/{dataset}"
+        box_path="scn_m_datasets/public/dump_2023/{dataset}"
     log: "logs/{dataset}/upload_to_box.log"
     benchmark: "logs/{dataset}/upload_to_box.benchmark"
 

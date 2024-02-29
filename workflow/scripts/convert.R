@@ -15,12 +15,12 @@ species <- snakemake@params$species
 if (snakemake@params$level == "dataset") {
   title <- snakemake@params$dataset
   description <- sprintf("%s | %s | %s", snakemake@params$dataset, study$title, study$description)
-  link <- study$link
+  link <- sub(study$link, pattern = "&api_key.*", replacement = "")
 } else if (snakemake@params$level == "sample") {
   sample <- samples[samples$alias == token, ]
   title <- snakemake@params$sample
   description <- sprintf("%s | %s | %s | %s", snakemake@params$dataset, snakemake@params$sample, sample$title, sample$description)
-  link <- sample$link
+  link <- sub(sample$link, pattern = "&api_key.*", replacement = "")
 }
 
 markers <- list()

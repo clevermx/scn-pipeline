@@ -20,7 +20,7 @@ rule merge_samples:
     threads: 4
     priority: 5
     resources:
-        mem_mb=64000
+        mem_mb=80000
     log: "logs/{dataset}/merge_samples.log"
     benchmark: "logs/{dataset}/merge_samples.benchmark"
     conda: "../../envs/seurat_analysis.yaml"

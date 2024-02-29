@@ -27,7 +27,7 @@ rule markers:
     threads: 4
     priority: 6
     resources:
-        mem_mb=16000
+        mem_mb=32000
     log: "logs/{dataset}/{sample}/markers.log"
     benchmark: "logs/{dataset}/{sample}/markers.benchmark"
     conda: "../../envs/seurat_analysis.yaml"
@@ -49,5 +49,7 @@ use rule markers as markers_merged with:
             f"data/datasets/{{dataset}}/markers/clusters_{resolution}_pct.tsv"
             for resolution in RESOLUTIONS
         ]
+    resources:
+        mem_mb=64000
     log: "logs/{dataset}/markers.log"
     benchmark: "logs/{dataset}/markers.benchmark"
